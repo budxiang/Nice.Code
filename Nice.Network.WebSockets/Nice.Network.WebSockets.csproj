@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nice.Core.Log\Nice.Core.Log.csproj" />
+    <ProjectReference Include="..\Nice.Network.Base\Nice.Network.Base.csproj" />
+  </ItemGroup>
+
+</Project>
