@@ -1,0 +1,11 @@
+E:\Projects\Nice.Code\Nice.Network.Web\obj\Debug\netcoreapp2.0\Nice.Network.Web.csprojResolveAssemblyReference.cache
+E:\Projects\Nice.Code\Nice.Network.Web\obj\Debug\netcoreapp2.0\Nice.Network.Web.csproj.CoreCompileInputs.cache
+E:\Projects\Nice.Code\Nice.Network.Web\obj\Debug\netcoreapp2.0\Nice.Network.Web.AssemblyInfoInputs.cache
+E:\Projects\Nice.Code\Nice.Network.Web\obj\Debug\netcoreapp2.0\Nice.Network.Web.AssemblyInfo.cs
+E:\Projects\Nice.Code\Nice.Network.Web\bin\Debug\netcoreapp2.0\Nice.Network.Web.deps.json
+E:\Projects\Nice.Code\Nice.Network.Web\bin\Debug\netcoreapp2.0\Nice.Network.Web.dll
+E:\Projects\Nice.Code\Nice.Network.Web\bin\Debug\netcoreapp2.0\Nice.Core.Log.dll
+E:\Projects\Nice.Code\Nice.Network.Web\bin\Debug\netcoreapp2.0\Nice.Core.Log.pdb
+E:\Projects\Nice.Code\Nice.Network.Web\bin\Debug\netcoreapp2.0\Nice.Network.Web.pdb
+E:\Projects\Nice.Code\Nice.Network.Web\obj\Debug\netcoreapp2.0\Nice.Network.Web.dll
+E:\Projects\Nice.Code\Nice.Network.Web\obj\Debug\netcoreapp2.0\Nice.Network.Web.pdb

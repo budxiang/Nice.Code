@@ -1,0 +1,11 @@
+E:\Projects\Nice.Code\Nice.Network.Demo\bin\Debug\netcoreapp2.0\Nice.Network.Demo.deps.json
+E:\Projects\Nice.Code\Nice.Network.Demo\bin\Debug\netcoreapp2.0\Nice.Network.Demo.runtimeconfig.json
+E:\Projects\Nice.Code\Nice.Network.Demo\bin\Debug\netcoreapp2.0\Nice.Network.Demo.runtimeconfig.dev.json
+E:\Projects\Nice.Code\Nice.Network.Demo\bin\Debug\netcoreapp2.0\Nice.Network.Demo.dll
+E:\Projects\Nice.Code\Nice.Network.Demo\bin\Debug\netcoreapp2.0\Nice.Network.Demo.pdb
+E:\Projects\Nice.Code\Nice.Network.Demo\obj\Debug\netcoreapp2.0\Nice.Network.Demo.csprojResolveAssemblyReference.cache
+E:\Projects\Nice.Code\Nice.Network.Demo\obj\Debug\netcoreapp2.0\Nice.Network.Demo.csproj.CoreCompileInputs.cache
+E:\Projects\Nice.Code\Nice.Network.Demo\obj\Debug\netcoreapp2.0\Nice.Network.Demo.AssemblyInfoInputs.cache
+E:\Projects\Nice.Code\Nice.Network.Demo\obj\Debug\netcoreapp2.0\Nice.Network.Demo.AssemblyInfo.cs
+E:\Projects\Nice.Code\Nice.Network.Demo\obj\Debug\netcoreapp2.0\Nice.Network.Demo.dll
+E:\Projects\Nice.Code\Nice.Network.Demo\obj\Debug\netcoreapp2.0\Nice.Network.Demo.pdb
