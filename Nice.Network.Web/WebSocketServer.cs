@@ -1,5 +1,4 @@
-﻿using Nice.Core.Log;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.WebSockets;
 using System.Threading;
@@ -45,13 +44,13 @@ namespace Nice.Network.Web
             {
                 webSocketContext = await httpListenerContext.AcceptWebSocketAsync(subProtocol, keepAliveInterval);
                 string ipaddr = httpListenerContext.Request.RemoteEndPoint.Address.ToString();
-                Logging.Info(string.Format("Connected:{0}", ipaddr));
+               Console.WriteLine(string.Format("Connected:{0}", ipaddr));
             }
             catch (Exception ex)
             {
                 httpListenerContext.Response.StatusCode = 500;
                 httpListenerContext.Response.Close();
-                Logging.Error(ex);
+                Console.WriteLine(ex);
                 return;
             }
             WebSocket webSocket = webSocketContext.WebSocket;

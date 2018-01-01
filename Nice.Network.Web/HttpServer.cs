@@ -1,5 +1,5 @@
-﻿using Nice.Core.Log;
-using System;
+﻿using System;
+using System.IO;
 using System.Net;
 
 namespace Nice.Network.Web
@@ -14,9 +14,11 @@ namespace Nice.Network.Web
         {
             if (!HttpListener.IsSupported)
                 throw new NotSupportedException("不支持当前操作系统");
-
             if (listenerPrefixs == null || listenerPrefixs.Length == 0)
                 throw new ArgumentNullException("listenerPrefixs不能为空");
+            if (!Directory.Exists(physicalPath))
+                throw new ArgumentException("physicalPath指定路径不存在," + physicalPath);
+
             httpListener = new HttpListener();
             handler = new HttpListenerHandler(physicalPath);
             foreach (string listenerPrefix in listenerPrefixs)
@@ -40,11 +42,11 @@ namespace Nice.Network.Web
                 catch (ObjectDisposedException ex)
                 {
                     if (!isAlive) return;
-                    Logging.Error(ex);
+                    Console.WriteLine(ex);
                 }
                 catch (Exception ex)
                 {
-                    Logging.Error(ex);
+                    Console.WriteLine(ex);
                 }
             }
         }

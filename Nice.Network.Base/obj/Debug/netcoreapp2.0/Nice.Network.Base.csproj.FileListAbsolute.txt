@@ -1,9 +1,0 @@
-E:\Projects\Nice.Code\Nice.Network.Base\bin\Debug\netcoreapp2.0\Nice.Network.Base.deps.json
-E:\Projects\Nice.Code\Nice.Network.Base\bin\Debug\netcoreapp2.0\Nice.Network.Base.dll
-E:\Projects\Nice.Code\Nice.Network.Base\bin\Debug\netcoreapp2.0\Nice.Network.Base.pdb
-E:\Projects\Nice.Code\Nice.Network.Base\obj\Debug\netcoreapp2.0\Nice.Network.Base.csproj.CoreCompileInputs.cache
-E:\Projects\Nice.Code\Nice.Network.Base\obj\Debug\netcoreapp2.0\Nice.Network.Base.AssemblyInfoInputs.cache
-E:\Projects\Nice.Code\Nice.Network.Base\obj\Debug\netcoreapp2.0\Nice.Network.Base.AssemblyInfo.cs
-E:\Projects\Nice.Code\Nice.Network.Base\obj\Debug\netcoreapp2.0\Nice.Network.Base.dll
-E:\Projects\Nice.Code\Nice.Network.Base\obj\Debug\netcoreapp2.0\Nice.Network.Base.pdb
-E:\Projects\Nice.Code\Nice.Network.Base\obj\Debug\netcoreapp2.0\Nice.Network.Base.csprojResolveAssemblyReference.cache

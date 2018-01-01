@@ -56,6 +56,7 @@ namespace Nice.Network.Web
             byte[] data = Encoding.UTF8.GetBytes(message);
             response.StatusCode = statusCode;
             response.ContentType = MimeMapping.Text;
+            response.ContentEncoding = Encoding.UTF8;
             WriteBinary(response, data);
         }
         public static void WriteBinary(HttpListenerResponse response, byte[] data)

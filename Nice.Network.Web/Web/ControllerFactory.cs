@@ -1,7 +1,6 @@
-﻿
-using Nice.Network.Web.Attributes;
-using Nice.Network.Web.Models;
+﻿using Nice.Network.Web.Attributes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -9,7 +8,6 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text;
-using System.Collections;
 
 namespace Nice.Network.Web
 {
@@ -21,8 +19,8 @@ namespace Nice.Network.Web
         private static Assembly assembly;
         public static void RegisterRoutes()
         {
-            string assemblyName = WebSettings.WebControllerAssembly;
-            string namespaceName = WebSettings.WebControllerNamespace;
+            string assemblyName = NiceWebSettings.WebControllerAssembly;
+            string namespaceName = NiceWebSettings.WebControllerNamespace;
             IEnumerable<Type> types = null;
             assembly = Assembly.Load(assemblyName);
             if (string.IsNullOrEmpty(namespaceName))

@@ -22,6 +22,13 @@ namespace Nice.Network.Web.Session
             set { sessionId = value; }
         }
 
+        private bool expired;
+
+        public bool Expired
+        {
+            get { return expired; }
+        }
+
         private DateTime expires;
         public DateTime Expires
         {
@@ -29,6 +36,23 @@ namespace Nice.Network.Web.Session
             set { expires = value; }
         }
 
+        private DateTime lastAccessedTime;
+        public DateTime LastAccessedTime
+        {
+            get { return lastAccessedTime; }
+            set { lastAccessedTime = value; }
+        }
+
+        public void Clear()
+        {
+            lock (_vars)
+            {
+                expired = true;
+                _vars.Clear();
+                if (OnChanged != null)
+                    OnChanged(this);
+            }
+        }
         public object this[string key]
         {
             get
@@ -37,6 +61,7 @@ namespace Nice.Network.Web.Session
                 {
                     if (_vars.ContainsKey(key))
                     {
+                        lastAccessedTime = DateTime.Now;
                         return _vars[key];
                     }
                     return null;
@@ -46,12 +71,14 @@ namespace Nice.Network.Web.Session
             {
                 lock (_vars)
                 {
+                    lastAccessedTime = DateTime.Now;
                     if (_vars.ContainsKey(key))
                     {
                         _vars[key] = value;
                     }
                     else
                     {
+                        if (expired) expired = false;
                         _vars.Add(key, value);
                     }
                     if (OnChanged != null)

@@ -821,16 +821,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
-      },
-      "Nice.Core.Log/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.0",
-        "compile": {
-          "bin/placeholder/Nice.Core.Log.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Nice.Core.Log.dll": {}
-        }
       }
     }
   },
@@ -3566,18 +3556,12 @@
         "system.xml.xmldocument.4.3.0.nupkg.sha512",
         "system.xml.xmldocument.nuspec"
       ]
-    },
-    "Nice.Core.Log/1.0.0": {
-      "type": "project",
-      "path": "../Nice.Core.Log/Nice.Core.Log.csproj",
-      "msbuildProject": "../Nice.Core.Log/Nice.Core.Log.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Microsoft.NETCore.App >= 2.0.0",
-      "Newtonsoft.Json >= 10.0.3",
-      "Nice.Core.Log >= 1.0.0"
+      "Newtonsoft.Json >= 10.0.3"
     ]
   },
   "packageFolders": {
@@ -3590,11 +3574,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\Projects\\Nice.Code\\Nice.Network.Web\\Nice.Network.Web.csproj",
+      "projectUniqueName": "E:\\Projects\\Nice.Network.Web\\Nice.Network.Web\\Nice.Network.Web.csproj",
       "projectName": "Nice.Network.Web",
-      "projectPath": "E:\\Projects\\Nice.Code\\Nice.Network.Web\\Nice.Network.Web.csproj",
+      "projectPath": "E:\\Projects\\Nice.Network.Web\\Nice.Network.Web\\Nice.Network.Web.csproj",
       "packagesPath": "C:\\Users\\xiang\\.nuget\\packages\\",
-      "outputPath": "E:\\Projects\\Nice.Code\\Nice.Network.Web\\obj\\",
+      "outputPath": "E:\\Projects\\Nice.Network.Web\\Nice.Network.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3612,11 +3596,7 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {
-            "E:\\Projects\\Nice.Code\\Nice.Core.Log\\Nice.Core.Log.csproj": {
-              "projectPath": "E:\\Projects\\Nice.Code\\Nice.Core.Log\\Nice.Core.Log.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -3631,12 +3611,12 @@
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.0.0",
+            "version": "[2.0.0, )",
             "autoReferenced": true
           },
           "Newtonsoft.Json": {
             "target": "Package",
-            "version": "10.0.3"
+            "version": "[10.0.3, )"
           }
         },
         "imports": [

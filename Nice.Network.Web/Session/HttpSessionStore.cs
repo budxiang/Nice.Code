@@ -1,5 +1,4 @@
-﻿using Nice.Core.Log;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -27,7 +26,6 @@ namespace Nice.Network.Web.Session
                 TimingDetect();
             });
         }
-        // 添加session
         public void Add(Cookie cookie)
         {
             lock (sessions)
@@ -48,7 +46,6 @@ namespace Nice.Network.Web.Session
                 }
             }
         }
-        //获取session
         public HttpSession Get(string sessionId)
         {
             lock (sessions)
@@ -60,12 +57,10 @@ namespace Nice.Network.Web.Session
                 return null;
             }
         }
-        //获取session文件名称
         private string GetSessionFileName(string sessionId)
         {
             return Path.Combine(dirSessionStore, sessionId + ".session");
         }
-        //保存
         public void Save(HttpSession session)
         {
             Task.Run(() =>
@@ -81,22 +76,20 @@ namespace Nice.Network.Web.Session
                     }
                     catch (IOException ex)
                     {
-                        Logging.Error(ex);
+                        Console.WriteLine(ex);
                     }
                     catch (Exception ex)
                     {
-                        Logging.Error(ex);
+                        Console.WriteLine(ex);
                     }
                 }
             });
         }
-        //session发送变化事件
         private void Session_OnChanged(HttpSession session)
         {
             Save(session);
         }
 
-        //删除存储
         private void StoreDelete(string id)
         {
             try
@@ -113,14 +106,13 @@ namespace Nice.Network.Web.Session
             }
             catch (IOException ex)
             {
-                Logging.Error(ex);
+                Console.WriteLine(ex);
             }
             catch (Exception ex)
             {
-                Logging.Error(ex);
+                Console.WriteLine(ex);
             }
         }
-        //读取session
         private void StoreRead()
         {
             try
@@ -154,14 +146,13 @@ namespace Nice.Network.Web.Session
             }
             catch (IOException ex)
             {
-                Logging.Error(ex);
+                Console.WriteLine(ex);
             }
             catch (Exception ex)
             {
-                Logging.Error(ex);
+                Console.WriteLine(ex);
             }
         }
-        //定时检测
         private void TimingDetect()
         {
             while (isActive)
@@ -178,6 +169,10 @@ namespace Nice.Network.Web.Session
                             {
                                 delList.Add(item.Key);
                             }
+                            else if (!item.Value.Expired && item.Value.LastAccessedTime.AddSeconds(NiceWebSettings.SessionTimeout) < dtNow)
+                            {
+                                item.Value.Clear();
+                            }
                         }
                         if (delList.Count > 0)
                         {
@@ -190,7 +185,7 @@ namespace Nice.Network.Web.Session
                     }
                     catch (Exception ex)
                     {
-                        Logging.Error(ex);
+                        Console.WriteLine(ex);
                     }
                 }
                 Thread.Sleep(2000);

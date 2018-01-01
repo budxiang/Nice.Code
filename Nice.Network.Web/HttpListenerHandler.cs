@@ -1,6 +1,4 @@
 ﻿
-using Nice.Core.Log;
-using Nice.Network.Web.Models;
 using Nice.Network.Web.Session;
 using System;
 using System.Linq;
@@ -37,10 +35,12 @@ namespace Nice.Network.Web
                 Cookie cookie = new Cookie();
                 cookie.Name = sessionCookieName;
                 cookie.Value = Guid.NewGuid().ToString("N");
-                cookie.Expires = DateTime.Now.AddSeconds(WebSettings.SessionTimeout);
+                //cookie.Expires = DateTime.Now.AddSeconds(NiceWebSettings.SessionTimeout);
+                cookie.Expires = DateTime.Now.AddYears(1);
+                cookie.Secure = true;
                 context.Response.SetCookie(cookie);
                 sessionStore.Add(cookie);
-                Logging.Info(string.Format("新的HTTP会话{0}", cookie.Value));
+               Console.WriteLine(string.Format("新的HTTP会话{0}", cookie.Value));
             }
         }
         private void OnProcessRequest(HttpListenerContext context)
@@ -69,7 +69,7 @@ namespace Nice.Network.Web
                     string contentType = MimeMapping.Get(extension);
                     string filepath = null;
                     if (contentType == MimeMapping.Html)
-                        filepath = FileHelper.PathCombine(rootPath + "\\" + WebSettings.ViewsPath, absolutePath);
+                        filepath = FileHelper.PathCombine(rootPath + "\\" + NiceWebSettings.ViewsPath, absolutePath);
                     else
                         filepath = FileHelper.PathCombine(rootPath, absolutePath);
                     if (contentType == null)
@@ -113,17 +113,17 @@ namespace Nice.Network.Web
             catch (InvalidOperationException ex)
             {
                 ResponseException(response, ex);
-                Logging.Error(ex);
+                Console.WriteLine(ex);
             }
             catch (Exception ex)
             {
                 ResponseException(response, ex);
-                Logging.Error(ex);
+                Console.WriteLine(ex);
             }
         }
         private void ResponseDefault(HttpListenerResponse response)
         {
-            string filepath = FileHelper.PathCombine(rootPath + "\\" + WebSettings.ViewsPath, WebSettings.DefaultPage);
+            string filepath = FileHelper.PathCombine(rootPath + "\\" + NiceWebSettings.ViewsPath, NiceWebSettings.DefaultPage);
             HttpResponseExtensions.WriteFile(response, filepath, MimeMapping.Html);
         }
         private void ResponseException(HttpListenerResponse response, Exception ex)
@@ -134,15 +134,15 @@ namespace Nice.Network.Web
             }
             catch (ObjectDisposedException e)
             {
-                Logging.Error(e);
+                Console.WriteLine(e);
             }
             catch (InvalidOperationException e)
             {
-                Logging.Error(e);
+                Console.WriteLine(e);
             }
             catch (Exception e)
             {
-                Logging.Error(e);
+                Console.WriteLine(e);
             }
         }
         public void Close()
