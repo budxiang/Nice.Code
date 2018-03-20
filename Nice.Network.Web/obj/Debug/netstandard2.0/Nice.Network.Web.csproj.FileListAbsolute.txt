@@ -1,0 +1,9 @@
+E:\Projects\GitHub\donetstandard\Nice.Network.Web\Nice.Network.Web\obj\Debug\netstandard2.0\Nice.Network.Web.csprojResolveAssemblyReference.cache
+E:\Projects\GitHub\donetstandard\Nice.Network.Web\Nice.Network.Web\obj\Debug\netstandard2.0\Nice.Network.Web.csproj.CoreCompileInputs.cache
+E:\Projects\GitHub\donetstandard\Nice.Network.Web\Nice.Network.Web\obj\Debug\netstandard2.0\Nice.Network.Web.AssemblyInfoInputs.cache
+E:\Projects\GitHub\donetstandard\Nice.Network.Web\Nice.Network.Web\obj\Debug\netstandard2.0\Nice.Network.Web.AssemblyInfo.cs
+E:\Projects\GitHub\donetstandard\Nice.Network.Web\Nice.Network.Web\bin\Debug\netstandard2.0\Nice.Network.Web.deps.json
+E:\Projects\GitHub\donetstandard\Nice.Network.Web\Nice.Network.Web\bin\Debug\netstandard2.0\Nice.Network.Web.dll
+E:\Projects\GitHub\donetstandard\Nice.Network.Web\Nice.Network.Web\bin\Debug\netstandard2.0\Nice.Network.Web.pdb
+E:\Projects\GitHub\donetstandard\Nice.Network.Web\Nice.Network.Web\obj\Debug\netstandard2.0\Nice.Network.Web.dll
+E:\Projects\GitHub\donetstandard\Nice.Network.Web\Nice.Network.Web\obj\Debug\netstandard2.0\Nice.Network.Web.pdb
