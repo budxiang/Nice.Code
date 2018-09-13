@@ -30,6 +30,24 @@ namespace Nice.Network.Web
             response.ContentType = contentType;
             WriteBinary(response, page);
         }
+
+        public static void OutputFile(HttpListenerResponse response, string filename)
+        {
+            FileStream fs = File.OpenRead(filename);
+            response.ContentLength64 = fs.Length;
+            response.ContentType = MimeMapping.OctetStream;
+            response.AddHeader("Content-Disposition", "attachment;filename=" + Path.GetExtension(filename));
+            Stream output = response.OutputStream;
+            byte[] buffer = new byte[1024];
+            int read = 0;
+            while ((read = fs.Read(buffer, 0, 1024)) > 0)
+            {
+                output.Write(buffer, 0, read);
+            }
+            fs.Close();
+            output.Close();
+        }
+
         public static void Write(HttpListenerResponse response, object result, MimeType contentType)
         {
             byte[] data = null;
@@ -42,6 +60,25 @@ namespace Nice.Network.Web
             {
                 data = Encoding.UTF8.GetBytes(result.ToString());
                 response.ContentType = MimeMapping.Text;
+            }
+            else if (contentType == MimeType.OctetStream)
+            {
+                HttpReplyResult reply = result as HttpReplyResult;
+                if (reply != null && reply.result)
+                { 
+                    OutputFile(response, reply.data.ToString());
+                    response.Close();
+                    return;
+                }
+                if (reply == null)
+                {
+                    data = Encoding.UTF8.GetBytes("未知错误");
+                    response.ContentType = MimeMapping.Text;
+                }
+                else {
+                    data = Encoding.UTF8.GetBytes(reply.describe);
+                    response.ContentType = MimeMapping.Text;
+                }
             }
             if (data == null)
             {
