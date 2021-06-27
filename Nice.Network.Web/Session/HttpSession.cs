@@ -13,6 +13,7 @@ namespace Nice.Network.Web.Session
         public HttpSession(string id)
         {
             this.sessionId = id;
+            lastAccessedTime = DateTime.Now;
         }
 
         private string sessionId;
@@ -62,6 +63,8 @@ namespace Nice.Network.Web.Session
                     if (_vars.ContainsKey(key))
                     {
                         lastAccessedTime = DateTime.Now;
+                        if (OnChanged != null)
+                            OnChanged(this);
                         return _vars[key];
                     }
                     return null;

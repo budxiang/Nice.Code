@@ -7,22 +7,25 @@ namespace Nice.Network.Web
 {
     public class WebSocketServer
     {
+        private bool isAlive = false;
         private string subProtocol = null;
+        private readonly HttpListener httpListener = null;
         private TimeSpan keepAliveInterval = new TimeSpan();
-        private readonly HttpListener httpListener = new HttpListener();
 
-        public async void Start(string listenerPrefix)
+        public WebSocketServer(string listenerPrefix)
         {
             if (!HttpListener.IsSupported)
                 throw new NotSupportedException("不支持当前操作系统");
-
             if (string.IsNullOrEmpty(listenerPrefix))
                 throw new ArgumentException("listenerPrefix");
+            httpListener = new HttpListener();
+            this.isAlive = true;
+        }
 
-            httpListener.Prefixes.Add(listenerPrefix);
+        public async void Start()
+        {
             httpListener.Start();
-
-            while (true)
+            while (isAlive)
             {
                 HttpListenerContext httpListenerContext = await httpListener.GetContextAsync();
                 if (httpListenerContext.Request.IsWebSocketRequest)
@@ -44,7 +47,7 @@ namespace Nice.Network.Web
             {
                 webSocketContext = await httpListenerContext.AcceptWebSocketAsync(subProtocol, keepAliveInterval);
                 string ipaddr = httpListenerContext.Request.RemoteEndPoint.Address.ToString();
-               Console.WriteLine(string.Format("Connected:{0}", ipaddr));
+                Console.WriteLine(string.Format("Connected:{0}", ipaddr));
             }
             catch (Exception ex)
             {

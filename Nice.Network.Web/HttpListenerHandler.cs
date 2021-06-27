@@ -1,6 +1,7 @@
 ﻿
 using Nice.Network.Web.Session;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -12,12 +13,14 @@ namespace Nice.Network.Web
     {
         private readonly string rootPath = null;
         private readonly HttpSessionStore sessionStore = null;
+        private readonly VirtualPathMapping virtualPathMapping = null;
         private const string sessionCookieName = "__nice_sessionid";
 
-        public HttpListenerHandler(string physicalPath)
+        public HttpListenerHandler(string physicalPath, int sessionFileExpirationDays)
         {
             rootPath = physicalPath;
-            sessionStore = new HttpSessionStore();
+            sessionStore = new HttpSessionStore(sessionFileExpirationDays);
+            virtualPathMapping = new VirtualPathMapping();
         }
         public void ProcessRequest(HttpListenerContext context)
         {
@@ -30,17 +33,21 @@ namespace Nice.Network.Web
 
         private void SetSession(HttpListenerContext context)
         {
-            if (context.Request.Cookies[sessionCookieName] == null)
+            Cookie ssCookie = context.Request.Cookies[sessionCookieName];
+            if (ssCookie == null)
             {
                 Cookie cookie = new Cookie();
                 cookie.Name = sessionCookieName;
                 cookie.Value = Guid.NewGuid().ToString("N");
-                //cookie.Expires = DateTime.Now.AddSeconds(NiceWebSettings.SessionTimeout);
-                cookie.Expires = DateTime.Now.AddYears(1);
+                cookie.Expires = DateTime.Now.AddYears(2);
                 cookie.Secure = true;
                 context.Response.SetCookie(cookie);
                 sessionStore.Add(cookie);
-               Console.WriteLine(string.Format("新的HTTP会话{0}", cookie.Value));
+                Console.WriteLine(string.Format("新的HTTP会话{0}", cookie.Value));
+            }
+            else
+            {
+                sessionStore.ValidateCookie(ssCookie);
             }
         }
         private void OnProcessRequest(HttpListenerContext context)
@@ -71,7 +78,17 @@ namespace Nice.Network.Web
                     if (contentType == MimeMapping.Html)
                         filepath = FileHelper.PathCombine(rootPath + "\\" + NiceWebSettings.ViewsPath, absolutePath);
                     else
-                        filepath = FileHelper.PathCombine(rootPath, absolutePath);
+                    {
+                        if (virtualPathMapping.Validate(dirs[0]))
+                        {
+                            string virtualPath = dirs[0];
+                            filepath = FileHelper.PathCombine(virtualPathMapping.Get(virtualPath), absolutePath.Substring(virtualPath.Length + 1));
+                        }
+                        else
+                        {
+                            filepath = FileHelper.PathCombine(rootPath, absolutePath);
+                        }
+                    }
                     if (contentType == null)
                     {
                         HttpResponseExtensions.Write(response, StatusCode.ServiceUnavailable, "不接受当前Mime类型");
@@ -149,6 +166,11 @@ namespace Nice.Network.Web
         {
             if (sessionStore != null)
                 sessionStore.Close();
+        }
+
+        public void AddVirtualPath(IDictionary<string, string> keyValues)
+        {
+            virtualPathMapping.Add(keyValues);
         }
     }
 }

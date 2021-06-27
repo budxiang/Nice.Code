@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 
@@ -10,7 +11,12 @@ namespace Nice.Network.Web
         private readonly string physicalPath = null;
         private readonly HttpListener httpListener = null;
         private readonly HttpListenerHandler handler = null;
-        public HttpServer(string physicalPath, string[] listenerPrefixs)
+
+        public HttpServer(string physicalPath, string[] listenerPrefixs) : this(physicalPath, listenerPrefixs, 30)
+        {
+
+        }
+        public HttpServer(string physicalPath, string[] listenerPrefixs, int sessionFileExpirationDays)
         {
             if (!HttpListener.IsSupported)
                 throw new NotSupportedException("不支持当前操作系统");
@@ -18,9 +24,10 @@ namespace Nice.Network.Web
                 throw new ArgumentNullException("listenerPrefixs不能为空");
             if (!Directory.Exists(physicalPath))
                 throw new ArgumentException("physicalPath指定路径不存在," + physicalPath);
-
+            if (sessionFileExpirationDays == 0)
+                sessionFileExpirationDays = 30;
             httpListener = new HttpListener();
-            handler = new HttpListenerHandler(physicalPath);
+            handler = new HttpListenerHandler(physicalPath, sessionFileExpirationDays);
             foreach (string listenerPrefix in listenerPrefixs)
             {
                 httpListener.Prefixes.Add(listenerPrefix);
@@ -28,6 +35,7 @@ namespace Nice.Network.Web
             this.physicalPath = physicalPath;
             this.isAlive = true;
         }
+
         public async void Start()
         {
             httpListener.Start();
@@ -42,11 +50,11 @@ namespace Nice.Network.Web
                 catch (ObjectDisposedException ex)
                 {
                     if (!isAlive) return;
-                    Console.WriteLine(ex);
+                   Console.WriteLine(ex);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex);
+                   Console.WriteLine(ex);
                 }
             }
         }
@@ -56,6 +64,11 @@ namespace Nice.Network.Web
             handler.Close();
             httpListener.Stop();
             httpListener.Close();
+        }
+
+        public void AddVirtualPath(IDictionary<string, string> keyValues)
+        {
+            handler.AddVirtualPath(keyValues);
         }
     }
 }

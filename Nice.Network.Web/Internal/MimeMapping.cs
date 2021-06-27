@@ -4,17 +4,18 @@ namespace Nice.Network.Web
 {
     public enum MimeType
     {
-         OctetStream = 1,
-         Text = 2,
-         Json = 3,
-         Html = 4,
+        OctetStream = 1,
+        Text = 2,
+        Json = 3,
+        Html = 4,
     }
     public class MimeMapping
     {
         public const string OctetStream = "application/octet-stream";
         public const string Text = "text/plain";
-        public const string Json = "application/Json";
+        public const string Json = "application/json";
         public const string Html = "text/html";
+        public const string MultipartFormData = "multipart/form-data";
 
         private static Dictionary<string, string> dic = new Dictionary<string, string>() {
 
@@ -24,6 +25,8 @@ namespace Nice.Network.Web
             {".txt","text/plain" },
             {".jpg","image/jpeg" },{".png","image/png" }, {".ico","image/x-icon" }, {".gif","image/gif" },
             { ".woff","application/font-woff" }, { ".woff2","application/font-woff2" },
+            { ".sdv","application/octet-stream" },
+            { ".zip","application/octet-stream" },
         };
 
         public static string Get(string key)
